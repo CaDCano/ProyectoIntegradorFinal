@@ -171,8 +171,10 @@ def instrument_delete_html(instrument_id: int, db: Session = Depends(get_db)):
                 os.remove(full)
         except Exception:
             pass
-    db.delete(instrument)
+    instrument.stock = 0
+    instrument.active = False
     db.commit()
+    db.refresh(instrument)
     return RedirectResponse(url="/instruments/html", status_code=303)
 
 # ORDERS
