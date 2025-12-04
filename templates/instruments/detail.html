@@ -7,5 +7,6 @@
   {% if instrument.image %}
     <img src="{{ instrument.image }}" alt="imagen instrumento" style="max-height:200px"/>
   {% endif %}
+  <a href="/instruments/update/{{ instrument.id }}" class="btn-edit">Editar</a>
   <p><a href="/instruments/html">Volver</a></p>
 {% endblock %}
