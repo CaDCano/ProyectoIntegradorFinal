@@ -123,11 +123,12 @@ async def create_instrument_api(instrument: schemas.InstrumentCreate, db: Sessio
 
 @app.get("/instruments/", response_model=list[schemas.Instrument])
 def get_instruments_api(db: Session = Depends(get_db)):
-    return db.query(models.Instrument).all()
+    return (db.query(models.Instrument).filter(models.Instrument.active == True).all())
 
 @app.get("/instruments/html", response_class=HTMLResponse)
 def instruments_list_html(request: Request, db: Session = Depends(get_db)):
-    instruments = db.query(models.Instrument).all()
+    instruments = (db.query(models.Instrument).filter(models.Instrument.active == True).all())
+
     return templates.TemplateResponse("instruments/list.html", {"request": request, "instruments": instruments})
 
 @app.get("/instruments/create", response_class=HTMLResponse)
