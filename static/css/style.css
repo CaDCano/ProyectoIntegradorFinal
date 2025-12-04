@@ -183,6 +183,21 @@ button.delete:hover {
   background: #ff5c5c;
 }
 
+.btn-edit {
+    background: #1e90ff;
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 12px;
+}
+.btn-edit:hover {
+    background: #3ea0ff;
+}
+
+
 /*  FORMS */
 input, select, textarea {
   width: 100%;
