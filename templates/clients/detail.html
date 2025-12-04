@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Cliente: {{ client.name }}</h2>
+  <p>Email: {{ client.email }}</p>
+  <p>Teléfono: {{ client.phone }}</p>
+  {% if client.image %}
+    <img src="{{ client.image }}" alt="imagen cliente" style="max-height:200px"/>
+  {% endif %}
+  <p><a href="/clients/html">Volver</a></p>
+{% endblock %}

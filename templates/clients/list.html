@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Clientes</h2>
+  <a href="/clients/create">Crear cliente</a>
+  <table>
+    <thead><tr><th>ID</th><th>Nombre</th><th>Email</th><th>Teléfono</th><th>Imagen</th><th>Acciones</th></tr></thead>
+    <tbody>
+      {% for c in clients %}
+        <tr>
+          <td>{{ c.id }}</td>
+          <td><a href="/clients/{{ c.id }}">{{ c.name }}</a></td>
+          <td>{{ c.email }}</td>
+          <td>{{ c.phone }}</td>
+          <td>
+            {% if c.image %}
+              <img src="{{ c.image }}" alt="img" style="height:60px"/>
+            {% else %}
+              -
+            {% endif %}
+          </td>
+          <td>
+            <form method="post" action="/clients/delete/{{ c.id }}" style="display:inline">
+              <button type="submit">Eliminar</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
