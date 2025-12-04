@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Editar Instrumento</h2>
+
+<form action="/instruments/update/{{ instrument.id }}" method="post" class="form-card">
+
+    <label>Nombre</label>
+    <input type="text" name="name" value="{{ instrument.name }}" required>
+
+    <label>Descripción</label>
+    <textarea name="description" required>{{ instrument.description }}</textarea>
+
+    <label>Precio</label>
+    <input type="number" name="price" step="0.01" value="{{ instrument.price }}" required>
+
+    <label>Stock</label>
+    <input type="number" name="stock" value="{{ instrument.stock }}" required>
+
+    <button type="submit" class="btn-primary">Guardar cambios</button>
+</form>
+
+<a class="btn-secondary" href="/instruments/html">Volver</a>
+{% endblock %}
