@@ -183,6 +183,41 @@ def instrument_delete_html(instrument_id: int, db: Session = Depends(get_db)):
     db.refresh(instrument)
     return RedirectResponse(url="/instruments/html", status_code=303)
 
+@app.get("/instruments/update/{instrument_id}", response_class=HTMLResponse)
+def edit_instrument_form(request: Request, instrument_id: int, db: Session = Depends(get_db)):
+    instrument = db.query(models.Instrument).filter(models.Instrument.id == instrument_id).first()
+    if not instrument:
+        raise HTTPException(status_code=404, detail="Instrumento no encontrado")
+
+    return templates.TemplateResponse(
+        "instruments/edit.html",
+        {"request": request, "instrument": instrument}
+    )
+
+@app.post("/instruments/update/{instrument_id}")
+async def update_instrument(
+    request: Request,
+    instrument_id: int,
+    db: Session = Depends(get_db)
+):
+    form = await request.form()
+
+    instrument = db.query(models.Instrument).filter(models.Instrument.id == instrument_id).first()
+    if not instrument:
+        raise HTTPException(status_code=404, detail="Instrumento no encontrado")
+
+    instrument.name = form.get("name")
+    instrument.description = form.get("description")
+    instrument.price = float(form.get("price"))
+    instrument.stock = int(form.get("stock"))
+
+    db.commit()
+    db.refresh(instrument)
+
+    return RedirectResponse(url="/instruments/html", status_code=303)
+
+
+
 # ORDERS
 @app.post("/orders/", response_model=schemas.Order)
 def create_order_api(order: schemas.OrderCreate, db: Session = Depends(get_db)):
