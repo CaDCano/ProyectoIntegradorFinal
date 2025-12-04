@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Documentación del proyecto</h2>
+
+<p>API REST con documentación OpenAPI automática disponible en <a href="/docs">/docs</a> y <a href="/redoc">/redoc</a>.</p>
+
+<h3>Endpoints principales</h3>
+<ul>
+  <li>/clients/html - GUI para listar clientes</li>
+  <li>/clients/create - Formulario para crear cliente (subir imagen opcional)</li>
+  <li>/instruments/html - GUI para listar instrumentos</li>
+  <li>/instruments/create - Formulario para crear instrumento (subir imagen opcional)</li>
+  <li>/orders/html - GUI para listar ventas</li>
+  <li>/orders/create - Formulario para crear venta</li>
+  <li>/dashboard - Dashboard con ventas por instrumento y por día</li>
+</ul>
+
+<h3>Soporte de imágenes</h3>
+<p>Las imágenes se guardan en <code>/static/images/clients/</code> y <code>/static/images/instruments/</code> y se acceden desde las páginas HTML mediante la ruta que empieza con <code>/static/</code>.</p>
+
+{% endblock %}

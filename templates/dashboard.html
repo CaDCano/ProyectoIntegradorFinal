@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Dashboard</h2>
+
+  <section>
+    <h3>Ventas por instrumento</h3>
+    <canvas id="salesByInstrument" width="600" height="300"></canvas>
+  </section>
+
+  <section>
+    <h3>Ventas por día (últimos días)</h3>
+    <canvas id="salesByDay" width="800" height="300"></canvas>
+  </section>
+
+  <script>
+    const salesData = {{ sales_data | tojson }};
+    const salesByDay = {{ sales_by_day | tojson }};
+
+    const ctx1 = document.getElementById('salesByInstrument').getContext('2d');
+    new Chart(ctx1, {
+      type: 'bar',
+      data: {
+        labels: salesData.map(s => s.name),
+        datasets: [{
+          label: 'Ventas (USD)',
+          data: salesData.map(s => s.sales)
+        }]
+      }
+    });
+
+    const ctx2 = document.getElementById('salesByDay').getContext('2d');
+    new Chart(ctx2, {
+      type: 'line',
+      data: {
+        labels: salesByDay.map(s => s.day),
+        datasets: [{
+          label: 'Ventas por día (USD)',
+          fill: false,
+          data: salesByDay.map(s => s.sales)
+        }]
+      }
+    });
+  </script>
+
+{% endblock %}
