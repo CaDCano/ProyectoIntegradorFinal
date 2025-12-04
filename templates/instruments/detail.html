@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Instrumento: {{ instrument.name }}</h2>
+  <p>Marca: {{ instrument.brand }}</p>
+  <p>Precio: {{ instrument.price }}</p>
+  <p>Stock: {{ instrument.stock }}</p>
+  {% if instrument.image %}
+    <img src="{{ instrument.image }}" alt="imagen instrumento" style="max-height:200px"/>
+  {% endif %}
+  <p><a href="/instruments/html">Volver</a></p>
+{% endblock %}

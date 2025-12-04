@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Instrumentos</h2>
+  <a href="/instruments/create">Crear instrumento</a>
+  <table>
+    <thead><tr><th>ID</th><th>Nombre</th><th>Marca</th><th>Precio</th><th>Stock</th><th>Imagen</th><th>Acciones</th></tr></thead>
+    <tbody>
+      {% for i in instruments %}
+        <tr>
+          <td>{{ i.id }}</td>
+          <td><a href="/instruments/{{ i.id }}">{{ i.name }}</a></td>
+          <td>{{ i.brand }}</td>
+          <td>{{ i.price }}</td>
+          <td>{{ i.stock }}</td>
+          <td>
+            {% if i.image %}
+              <img src="{{ i.image }}" alt="img" style="height:60px"/>
+            {% else %}
+              -
+            {% endif %}
+          </td>
+          <td>
+            <form method="post" action="/instruments/delete/{{ i.id }}" style="display:inline">
+              <button type="submit">Eliminar</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
