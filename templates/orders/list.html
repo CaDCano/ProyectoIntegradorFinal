@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Ventas</h2>
+  <a href="/orders/create">Crear venta</a>
+  <table>
+    <thead><tr><th>ID</th><th>Cliente</th><th>Instrumento</th><th>Cantidad</th><th>Total</th><th>Fecha</th></tr></thead>
+    <tbody>
+      {% for o in orders %}
+        <tr>
+          <td>{{ o.id }}</td>
+          <td>{{ clients[o.client_id].name if clients[o.client_id] else o.client_id }}</td>
+          <td>{{ instruments[o.instrument_id].name if instruments[o.instrument_id] else o.instrument_id }}</td>
+          <td>{{ o.quantity }}</td>
+          <td>{{ o.total }}</td>
+          <td>{{ o.created_at }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

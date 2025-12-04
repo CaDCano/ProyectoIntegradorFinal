@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Crear venta</h2>
+  <form action="/orders/create" method="post">
+    <label>Cliente:
+      <select name="client_id" required>
+        {% for c in clients %}
+          <option value="{{ c.id }}">{{ c.name }}</option>
+        {% endfor %}
+      </select>
+    </label><br/>
+    <label>Instrumento:
+      <select name="instrument_id" required>
+        {% for i in instruments %}
+          <option value="{{ i.id }}">{{ i.name }} ({{ i.price }}) - stock: {{ i.stock }}</option>
+        {% endfor %}
+      </select>
+    </label><br/>
+    <label>Cantidad: <input name="quantity" type="number" value="1" min="1" required/></label><br/>
+    <button type="submit">Registrar venta</button>
+  </form>
+{% endblock %}
