@@ -6,6 +6,7 @@ from database import Base
 class Client(Base):
     __tablename__ = "clients"
 
+    active = Column(Boolean, default=True)
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
     email = Column(String, unique=True, index=True)
@@ -16,7 +17,8 @@ class Client(Base):
 
 class Instrument(Base):
     __tablename__ = "instruments"
-
+    
+    active = Column(Boolean, default=True)
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
     brand = Column(String)
@@ -26,7 +28,8 @@ class Instrument(Base):
 
 class Order(Base):
     __tablename__ = "orders"
-
+    
+    active = Column(Boolean, default=True)
     id = Column(Integer, primary_key=True, index=True)
     client_id = Column(Integer, ForeignKey("clients.id"))
     instrument_id = Column(Integer, ForeignKey("instruments.id"))
