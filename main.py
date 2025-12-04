@@ -154,10 +154,15 @@ async def instrument_create_post(
 
 @app.get("/instruments/{instrument_id}", response_class=HTMLResponse)
 def instrument_detail_html(request: Request, instrument_id: int, db: Session = Depends(get_db)):
-    instrument = db.query(models.Instrument).filter(models.Instrument.id == instrument_id).first()
+    instrument = (
+        db.query(models.Instrument).filter(models.Instrument.id == instrument_id).first())
+
     if not instrument:
         raise HTTPException(status_code=404, detail="Instrumento no encontrado")
-    return templates.TemplateResponse("instruments/detail.html", {"request": request, "instrument": instrument})
+
+    return templates.TemplateResponse("instruments/detail.html",{"request": request,"instrument": instrument,}
+    )
+
 
 @app.post("/instruments/delete/{instrument_id}")
 def instrument_delete_html(instrument_id: int, db: Session = Depends(get_db)):
